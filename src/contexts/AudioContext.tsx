@@ -95,6 +95,7 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     if (!audioRef.current) {
       audioRef.current = new Audio();
       audioRef.current.volume = 0.8;
+      audioRef.current.preload = "none";
     }
     const audio = audioRef.current;
 
@@ -124,8 +125,9 @@ export function AudioProvider({ children }: { children: ReactNode }) {
     if (audioRef.current && currentTrack) {
       const targetSrc = window.location.origin + currentTrack.url;
       if (audioRef.current.src !== targetSrc) {
+        // Only set src if we are actively playing or if the user clicked play,
+        // or just rely on preload="none" to prevent download until .play() is called.
         audioRef.current.src = currentTrack.url;
-        audioRef.current.load();
         if (isPlaying) {
           audioRef.current.play().catch(() => setIsPlaying(false));
         }

@@ -28,6 +28,8 @@ export default function Home() {
               src="/hero.png"
               alt="SonicArchitect Studio"
               fill
+              sizes="100vw"
+              quality={60}
               className="object-cover opacity-60"
               priority
             />

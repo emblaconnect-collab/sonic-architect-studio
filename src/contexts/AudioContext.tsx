@@ -54,11 +54,11 @@ export const MOCK_PLAYLIST: TrackData[] = [
   },
   {
     id: "3",
-    title: "Cidade Neon",
-    artist: "Urban Poetry Collective",
-    genre: "Trap",
-    url: "/audios/cidade-neon.mp3",
-    cover: "https://lh3.googleusercontent.com/aida-public/AB6AXuBj5vFPKOPLHAQAG03rtJdcTQ_Ae6U4uWAq2s4ueVJk0Ty16NcsUss59em3MkblIuJQsSlx8kx_syW72i4ePDhGU-hbwurrYj-D_aoadS57FAu4iacFpHQwvRqj8fySFIyg8R9tEXQvY2CAsdzEw0KPELo8_JG4CH-ikdsUZnUGVoQJq_7hgepV-5BaEQ0uLJlPhlNrzhX8q1YnnCCe7Q2tfSRJpxywsrdItmaF3YPTnlzHZyfdcAvYPFcavfXzyXTmCDVrzdnL4w4",
+    title: "DPMO",
+    artist: "Digga D",
+    genre: "UK Drill · UK Rap",
+    url: "/audios/digga-d-dpmo.mp3",
+    cover: "/capa-digga-d.png",
   },
   {
     id: "4",

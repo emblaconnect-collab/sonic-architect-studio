@@ -125,6 +125,7 @@ export default function Portfolio() {
                 alt="artistic album cover featuring a silhouette of a rapper against a vibrant cyan neon cityscape background"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="lazy"
                 className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
@@ -149,6 +150,7 @@ export default function Portfolio() {
                 alt="grainy black and white portrait of a singer in a recording booth with dramatic shadows and cyan light leak"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="lazy"
                 className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
@@ -173,6 +175,7 @@ export default function Portfolio() {
                 alt="abstract visual representation of sound waves in electric blue and deep purple against a black background"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                loading="lazy"
                 className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
@@ -308,6 +311,7 @@ export default function Portfolio() {
                 alt="blurred motion shot of a crowded concert stage with bright strobe lights and silhouettes"
                 fill
                 sizes="(max-width: 1536px) 100vw, 1536px"
+                loading="lazy"
                 className="object-cover"
               />
             </div>

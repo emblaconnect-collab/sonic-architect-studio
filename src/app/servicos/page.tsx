@@ -65,6 +65,7 @@ export default function Services() {
                   alt="Modern high-end music studio with professional microphones"
                   fill
                   sizes="(max-width: 1024px) 100vw, 66vw"
+                  loading="lazy"
                   className="object-cover opacity-40 group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -87,6 +88,7 @@ export default function Services() {
                   alt="Close up of a professional music producer working on a MIDI controller"
                   fill
                   sizes="(max-width: 1024px) 100vw, 33vw"
+                  loading="lazy"
                   className="object-cover opacity-30 group-hover:scale-105 transition-transform duration-700"
                 />
               </div>
@@ -118,6 +120,7 @@ export default function Services() {
                   alt="High quality audio waveform on a professional computer monitor"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
+                  loading="lazy"
                   className="object-cover opacity-60"
                 />
               </div>
@@ -271,6 +274,7 @@ export default function Services() {
                 alt="Abstract dynamic sound waves pattern in neon cyan colors"
                 fill
                 sizes="(max-width: 1536px) 100vw, 1536px"
+                loading="lazy"
                 className="object-cover"
               />
             </div>

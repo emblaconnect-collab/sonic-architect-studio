@@ -76,6 +76,7 @@ export default function Beats() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMQrGxL2hArKhSQ1y7X-0nhfHMWorzFYqmAz8zqWaAZstoI7fZ0Y6lDYQ4LUUszFbfD4QdOP3yTnow2ehVplLTUl5k1rh35OuDCFKH57odpX_u6cvntvp1fcI1Ge6kY6Tvxeax1uTNTt-5mvSATKCEPfB3ReNfucg7NjB0GdiYkNDRvEpGRgN7WhV1obl4uKf354lKPhnQty4ZIw5NaBUenXZTBMhUu2INv8SfoY7rNn6Xlc1dlsXms44vBrnkHmyG2zesNn4qTPg"
                 alt="Cyber Punk Drill - Beat Destaque"
                 fill
+                sizes="(max-width: 768px) 100vw, 320px"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
               />
@@ -175,6 +176,8 @@ export default function Beats() {
                       src={beat.img}
                       alt={beat.title}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                      loading="lazy"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <a

@@ -75,7 +75,7 @@ export function GlassPlayer() {
     <>
       {/* Playlist Panel */}
       {showPlaylist && (
-        <div className="fixed bottom-[72px] md:bottom-24 inset-x-0 md:right-0 md:left-auto md:w-96 z-40 bg-background/95 backdrop-blur-3xl border-t md:border-l border-white/10 shadow-2xl max-h-[60vh] flex flex-col">
+        <div className="fixed bottom-[140px] md:bottom-24 inset-x-0 md:right-0 md:left-auto md:w-96 z-40 bg-background/95 backdrop-blur-3xl border-t md:border-l border-white/10 shadow-2xl max-h-[60vh] flex flex-col overscroll-contain">
           <div className="flex items-center justify-between px-5 py-4 border-b border-white/5">
             <div className="flex items-center gap-2">
               <ListMusic className="w-4 h-4 text-primary" />
@@ -86,7 +86,7 @@ export function GlassPlayer() {
               <X className="w-4 h-4" />
             </button>
           </div>
-          <div className="overflow-y-auto flex-1 scrollbar-thin">
+          <div className="overflow-y-auto flex-1 scrollbar-thin overscroll-contain pb-2">
             {MOCK_PLAYLIST.map((track, i) => {
               const isActive = currentTrack?.id === track.id;
               return (
@@ -96,7 +96,7 @@ export function GlassPlayer() {
                   className={`w-full flex items-center gap-4 px-5 py-3 hover:bg-white/5 transition-colors text-left group ${isActive ? "bg-primary/10" : ""}`}
                 >
                   <div className="relative w-10 h-10 rounded-md overflow-hidden flex-shrink-0">
-                    <Image src={track.cover} alt={track.title} fill className="object-cover" />
+                    <Image src={track.cover} alt={track.title} fill sizes="(max-width: 768px) 50px, 50px" loading="lazy" className="object-cover" />
                     {isActive && (
                       <div className="absolute inset-0 bg-primary/20 flex items-center justify-center">
                         <div className="flex gap-0.5 items-end h-4">
@@ -143,7 +143,7 @@ export function GlassPlayer() {
           {/* Track Info */}
           <div className="flex items-center gap-3 flex-1 min-w-0">
             <div className="w-10 h-10 md:w-12 md:h-12 bg-surface-highest rounded-lg flex-shrink-0 relative overflow-hidden border border-white/5 shadow-lg">
-              <Image src={currentTrack.cover} alt={currentTrack.title} fill className="object-cover" />
+              <Image src={currentTrack.cover} alt={currentTrack.title} fill sizes="(max-width: 768px) 60px, 60px" loading="lazy" className="object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="font-headline font-bold text-xs md:text-sm truncate text-white uppercase tracking-tight">{currentTrack.title}</p>

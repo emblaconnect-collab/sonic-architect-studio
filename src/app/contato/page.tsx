@@ -166,8 +166,9 @@ export default function ContactPage() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_u5ceyFgpjfXja0kpabpqr9JXS48k_CW0CVaSdkvpwsRInN_XbjJfXrUfpMrzBNPHzmo7SYIlgmPCMIK8js4fQLCHk90a7o9ZeZPs0z2jUybbFgihwI9oj-Kg4tjzrrGnyvad5PkQ3y5E5__ptR83qO8WyAjQ7BRN33lMxcYNLMAxWSSg2DJ1xrira1nnMMfptN1WS9j7tczmcVq7GIyE8lpLMHAOFboOa0NS36xNws-0-SG3p4Hy4d3P6_XKKwBGZuOirC9JtIw"
                 alt="São Paulo industrial district view"
                 fill
-                className="object-cover grayscale brightness-50 contrast-125 transition-transform duration-700 group-hover:scale-110"
                 sizes="(max-width: 1024px) 100vw, 40vw"
+                loading="lazy"
+                className="object-cover grayscale brightness-50 contrast-125 transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="relative">

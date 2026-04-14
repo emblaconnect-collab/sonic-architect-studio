@@ -159,6 +159,7 @@ export default function Home() {
                   alt="BNP - Caio Ocean" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
+                  loading="lazy"
                   className="object-cover group-hover:scale-110 transition-transform duration-700" 
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -181,6 +182,7 @@ export default function Home() {
                   alt="Dinheiro não sai de moda - Big Blakk" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
+                  loading="lazy"
                   className="object-cover group-hover:scale-110 transition-transform duration-700" 
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -192,25 +194,27 @@ export default function Home() {
               <p className="text-primary/60 text-xs font-medium mt-0.5 uppercase tracking-widest">R&B / Drill · Hip Hop Underground</p>
             </div>
 
-            {/* Release 3 */}
+            {/* Release 3 — Digga D */}
             <div 
               onClick={() => handlePlayDefault(2)}
               className="min-w-[300px] md:min-w-[400px] group cursor-pointer shrink-0"
             >
               <div className="aspect-square rounded-xl overflow-hidden mb-6 relative">
                 <Image 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj5vFPKOPLHAQAG03rtJdcTQ_Ae6U4uWAq2s4ueVJk0Ty16NcsUss59em3MkblIuJQsSlx8kx_syW72i4ePDhGU-hbwurrYj-D_aoadS57FAu4iacFpHQwvRqj8fySFIyg8R9tEXQvY2CAsdzEw0KPELo8_JG4CH-ikdsUZnUGVoQJq_7hgepV-5BaEQ0uLJlPhlNrzhX8q1YnnCCe7Q2tfSRJpxywsrdItmaF3YPTnlzHZyfdcAvYPFcavfXzyXTmCDVrzdnL4w4" 
-                  alt="Cidade Neon Cover" 
+                  src="/capa-digga-d.png" 
+                  alt="DPMO - Digga D" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
+                  loading="lazy"
                   className="object-cover group-hover:scale-110 transition-transform duration-700" 
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span className="material-symbols-outlined text-6xl text-white">play_circle</span>
                 </div>
               </div>
-              <h4 className="text-xl font-bold font-headline uppercase mb-1">Cidade Neon</h4>
-              <p className="text-on-surface-variant text-sm font-medium">Urban Poetry Collective</p>
+              <h4 className="text-xl font-bold font-headline uppercase mb-1">DPMO</h4>
+              <p className="text-on-surface-variant text-sm font-medium">Digga D</p>
+              <p className="text-primary/60 text-xs font-medium mt-0.5 uppercase tracking-widest">UK Drill · UK Rap</p>
             </div>
 
 
@@ -222,6 +226,7 @@ export default function Home() {
                   alt="Vibe Retro Cover" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
+                  loading="lazy"
                   className="object-cover group-hover:scale-110 transition-transform duration-700" 
                 />
                 <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
@@ -279,6 +284,8 @@ export default function Home() {
                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTXfLgN9kF9kF9zL9l-E0pL-qXF6gQ-q9-9E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E"
                 alt="Portrait of the head engineer at work in a dark studio room with orange and teal accent lights"
                 fill
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                loading="lazy"
                 className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>

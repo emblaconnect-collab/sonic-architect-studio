@@ -8,11 +8,12 @@ import { Footer } from "@/components/Footer";
 import { GlassPlayer } from "@/components/GlassPlayer";
 import { useCart } from "@/contexts/CartContext";
 
-const WA = "https://wa.me/5519997791763?text=";
+const WA_NUMBER = "5519997791763";
 
 export default function Checkout() {
   const { items, removeFromCart, subtotal, clearCart } = useCart();
   const [paymentMethod, setPaymentMethod] = useState("pix");
+  const [formErrors, setFormErrors] = useState<Record<string, boolean>>({});
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -21,6 +22,10 @@ export default function Checkout() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    // Limpa erro do campo quando o usuário digita
+    if (formErrors[e.target.name]) {
+      setFormErrors((prev) => ({ ...prev, [e.target.name]: false }));
+    }
   };
 
   const paymentLabels: Record<string, string> = {
@@ -32,42 +37,67 @@ export default function Checkout() {
   const handleFinalize = () => {
     if (items.length === 0) return;
 
-    const beatsList = items
-      .map(
-        (item, i) =>
-          `${i + 1}. ${item.title} — ${item.license.name} (${
-            item.license.price > 0 ? `R$ ${item.license.price}` : "Sob Consulta"
-          })`
-      )
-      .join("\n");
+    // Validação obrigatória
+    const errors: Record<string, boolean> = {};
+    if (!form.name.trim()) errors.name = true;
+    if (!form.email.trim()) errors.email = true;
+    if (!form.phone.trim()) errors.phone = true;
 
-    const totalText =
-      subtotal > 0
-        ? `R$ ${subtotal}`
-        : "Sob Consulta (contém itens exclusivos)";
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
 
-    const message = `🎵 *NOVO PEDIDO — SonicArchitect Studio*
+    // Monta cada beat formatado
+    const beatsLines = items.map((item, i) => {
+      const priceText = item.license.price > 0 ? `R$ ${item.license.price}` : "Sob Consulta";
+      return `  ${i + 1}. ${item.title} - ${item.license.name} (${priceText})`;
+    });
 
-📋 *Dados do Cliente:*
-Nome: ${form.name || "Não informado"}
-Email: ${form.email || "Não informado"}
-Telefone: ${form.phone || "Não informado"}
+    const totalText = subtotal > 0
+      ? `R$ ${subtotal}`
+      : "Sob Consulta (contém itens exclusivos)";
 
-🎹 *Beats Selecionados:*
-${beatsList}
+    // Monta a mensagem usando array de linhas pra garantir formatação limpa
+    const lines = [
+      "🎵 *NOVO PEDIDO — SonicArchitect Studio*",
+      "",
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      "",
+      "📋 *Dados do Cliente:*",
+      "",
+      `  Nome: ${form.name.trim()}`,
+      `  Email: ${form.email.trim()}`,
+      `  Telefone: ${form.phone.trim()}`,
+      "",
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      "",
+      "🎹 *Beats Selecionados:*",
+      "",
+      ...beatsLines,
+      "",
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      "",
+      `💳 *Pagamento:* ${paymentLabels[paymentMethod]}`,
+      "",
+      `💰 *Total:* ${totalText}`,
+      "",
+      "━━━━━━━━━━━━━━━━━━━━━━",
+      "",
+      "Gostaria de finalizar a compra!",
+    ];
 
-💳 *Método de Pagamento:* ${paymentLabels[paymentMethod]}
-
-💰 *Total:* ${totalText}
-
-Gostaria de finalizar a compra!`;
-
-    window.open(
-      `${WA}${encodeURIComponent(message)}`,
-      "_blank",
-      "noopener,noreferrer"
-    );
+    const message = lines.join("\n");
+    const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
+
+  const inputClass = (field: string) =>
+    `bg-surface-container-lowest border-0 border-b-2 py-3 px-0 text-on-surface placeholder:text-outline focus:ring-0 transition-all ${
+      formErrors[field]
+        ? "border-error"
+        : "border-outline-variant focus:border-primary"
+    }`;
 
   return (
     <>
@@ -129,42 +159,54 @@ Gostaria de finalizar a compra!`;
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="flex flex-col space-y-2">
                         <label className="text-xs uppercase tracking-widest text-on-surface-variant font-bold">
-                          Nome Completo
+                          Nome Completo <span className="text-error">*</span>
                         </label>
                         <input
                           name="name"
                           value={form.name}
                           onChange={handleChange}
-                          className="bg-surface-container-lowest border-0 border-b-2 border-outline-variant py-3 px-0 text-on-surface placeholder:text-outline focus:ring-0 focus:border-primary transition-all"
+                          className={inputClass("name")}
                           placeholder="Seu nome"
                           type="text"
+                          required
                         />
+                        {formErrors.name && (
+                          <span className="text-error text-[11px] font-bold uppercase tracking-wider">Campo obrigatório</span>
+                        )}
                       </div>
                       <div className="flex flex-col space-y-2">
                         <label className="text-xs uppercase tracking-widest text-on-surface-variant font-bold">
-                          Email
+                          Email <span className="text-error">*</span>
                         </label>
                         <input
                           name="email"
                           value={form.email}
                           onChange={handleChange}
-                          className="bg-surface-container-lowest border-0 border-b-2 border-outline-variant py-3 px-0 text-on-surface placeholder:text-outline focus:ring-0 focus:border-primary transition-all"
+                          className={inputClass("email")}
                           placeholder="seu@email.com"
                           type="email"
+                          required
                         />
+                        {formErrors.email && (
+                          <span className="text-error text-[11px] font-bold uppercase tracking-wider">Campo obrigatório</span>
+                        )}
                       </div>
                       <div className="flex flex-col space-y-2 md:col-span-2">
                         <label className="text-xs uppercase tracking-widest text-on-surface-variant font-bold">
-                          Telefone / WhatsApp
+                          Telefone / WhatsApp <span className="text-error">*</span>
                         </label>
                         <input
                           name="phone"
                           value={form.phone}
                           onChange={handleChange}
-                          className="bg-surface-container-lowest border-0 border-b-2 border-outline-variant py-3 px-0 text-on-surface placeholder:text-outline focus:ring-0 focus:border-primary transition-all"
+                          className={inputClass("phone")}
                           placeholder="(00) 00000-0000"
                           type="tel"
+                          required
                         />
+                        {formErrors.phone && (
+                          <span className="text-error text-[11px] font-bold uppercase tracking-wider">Campo obrigatório</span>
+                        )}
                       </div>
                     </div>
                   </div>

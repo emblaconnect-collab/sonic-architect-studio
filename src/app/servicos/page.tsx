@@ -132,109 +132,136 @@ export default function Services() {
         <section className="px-8 py-24 bg-surface-container-low">
           <div className="max-w-screen-2xl mx-auto">
             <div className="text-center mb-20">
-              <h2 className="font-headline text-4xl md:text-5xl font-black tracking-tighter mb-4">Pacotes de <span className="text-primary">Sessão</span></h2>
-              <p className="font-body text-on-surface-variant max-w-2xl mx-auto">Escolha o plano ideal para o momento da sua carreira. Do single à mixtape completa.</p>
+              <h2 className="font-headline text-4xl md:text-5xl font-black tracking-tighter mb-4">Nossos <span className="text-primary">Serviços</span></h2>
+              <p className="font-body text-on-surface-variant max-w-2xl mx-auto">Serviços profissionais para cada etapa do seu projeto musical. Do ensaio à produção completa.</p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {/* Single Track */}
-              <div className="flex flex-col p-10 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-colors group relative overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {/* Ensaio */}
+              <div className="flex flex-col p-8 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-colors group relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <span className="material-symbols-outlined text-7xl">music_note</span>
+                  <span className="material-symbols-outlined text-6xl">piano</span>
                 </div>
-                <h4 className="font-headline text-xl font-bold mb-2">Faixa Single</h4>
-                <div className="text-4xl font-black text-primary mb-8 font-headline">R$ 450<span className="text-sm font-normal text-on-surface-variant">/faixa</span></div>
-                <ul className="space-y-4 mb-12 flex-grow z-10 relative">
-                  <li className="flex items-center gap-3 text-on-surface-variant">
+                <h4 className="font-headline text-lg font-bold mb-2">Ensaio</h4>
+                <div className="text-3xl font-black text-primary mb-2 font-headline">R$ 50</div>
+                <span className="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-8">1 hora</span>
+                <ul className="space-y-3 mb-10 flex-grow z-10 relative">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    4 horas de gravação
+                    Sala equipada
                   </li>
-                  <li className="flex items-center gap-3 text-on-surface-variant">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Mix & Master inclusas
+                    Amplificadores disponíveis
                   </li>
-                  <li className="flex items-center gap-3 text-on-surface-variant">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    1 Beat exclusivo
+                    Bateria no local
                   </li>
                 </ul>
                 <a 
-                  href={`${whatsappBase}${encodeURIComponent("Olá! Tenho interesse no pacote Faixa Single. Como podemos agendar?")}`}
+                  href={`${whatsappBase}${encodeURIComponent("Olá! Quero agendar um ensaio de 1 hora (R$ 50). Quais horários disponíveis?")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-10 w-full py-4 border border-outline-variant hover:border-primary hover:text-primary transition-all rounded-full font-bold text-center block"
+                  className="relative z-10 w-full py-3.5 border border-outline-variant hover:border-primary hover:text-primary transition-all rounded-full font-bold text-center block text-sm"
                 >
-                  Selecionar
+                  Agendar
                 </a>
               </div>
 
-              {/* EP Package */}
-              <div className="flex flex-col p-10 rounded-xl bg-surface-container-highest ring-2 ring-primary relative overflow-hidden shadow-[0_0_40px_rgba(35,218,237,0.1)]">
-                <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-primary text-on-primary text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full">
-                  Mais Popular
+              {/* Captação de Voz */}
+              <div className="flex flex-col p-8 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-colors group relative overflow-hidden">
+                <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <span className="material-symbols-outlined text-6xl">mic</span>
                 </div>
-                <h4 className="font-headline text-xl font-bold mb-2 mt-4">Pacote EP</h4>
-                <div className="text-4xl font-black text-primary mb-8 font-headline">R$ 1.200<span className="text-sm font-normal text-on-surface-variant">/3 faixas</span></div>
-                <ul className="space-y-4 mb-12 flex-grow z-10 relative">
-                  <li className="flex items-center gap-3 text-on-surface">
+                <h4 className="font-headline text-lg font-bold mb-2">Captação de Voz</h4>
+                <div className="text-3xl font-black text-primary mb-2 font-headline">R$ 80</div>
+                <span className="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-8">1 hora</span>
+                <ul className="space-y-3 mb-10 flex-grow z-10 relative">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    12 horas de estúdio
+                    Microfone condensador
                   </li>
-                  <li className="flex items-center gap-3 text-on-surface">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Mixagem Premium
+                    Tratamento acústico
                   </li>
-                  <li className="flex items-center gap-3 text-on-surface">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    3 Beats exclusivos
-                  </li>
-                  <li className="flex items-center gap-3 text-on-surface">
-                    <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Consultoria de Carreira
+                    Direção vocal inclusa
                   </li>
                 </ul>
                 <a 
-                  href={`${whatsappBase}${encodeURIComponent("E aí! To querendo fechar o Pacote EP (3 faixas). Como fazemos o pagamento?")}`}
+                  href={`${whatsappBase}${encodeURIComponent("E aí! Quero agendar uma captação de voz de 1 hora (R$ 80). Quando posso ir?")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-10 w-full py-4 bg-primary text-on-primary hover:bg-cyan-300 transition-all rounded-full font-bold text-center block"
+                  className="relative z-10 w-full py-3.5 border border-outline-variant hover:border-primary hover:text-primary transition-all rounded-full font-bold text-center block text-sm"
+                >
+                  Agendar
+                </a>
+              </div>
+
+              {/* Gravação de Bandas — Destaque */}
+              <div className="flex flex-col p-8 rounded-xl bg-surface-container-highest ring-2 ring-primary relative overflow-hidden shadow-[0_0_40px_rgba(35,218,237,0.1)]">
+                <div className="absolute top-3 left-1/2 -translate-x-1/2 bg-primary text-on-primary text-[10px] font-black uppercase tracking-widest px-4 py-1 rounded-full">
+                  Mais Popular
+                </div>
+                <h4 className="font-headline text-lg font-bold mb-2 mt-4">Gravação de Bandas</h4>
+                <div className="text-3xl font-black text-primary mb-2 font-headline">R$ 150</div>
+                <span className="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-8">por sessão</span>
+                <ul className="space-y-3 mb-10 flex-grow z-10 relative">
+                  <li className="flex items-center gap-3 text-on-surface text-sm">
+                    <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Gravação multipista
+                  </li>
+                  <li className="flex items-center gap-3 text-on-surface text-sm">
+                    <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Engenheiro de áudio
+                  </li>
+                  <li className="flex items-center gap-3 text-on-surface text-sm">
+                    <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
+                    Mixagem básica inclusa
+                  </li>
+                </ul>
+                <a 
+                  href={`${whatsappBase}${encodeURIComponent("Salve! Quero agendar uma gravação de banda (R$ 150). Qual a disponibilidade?")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative z-10 w-full py-3.5 bg-primary text-on-primary hover:bg-cyan-300 transition-all rounded-full font-bold text-center block text-sm"
                 >
                   Reservar Agora
                 </a>
               </div>
 
-              {/* Album Deal */}
-              <div className="flex flex-col p-10 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-colors group relative overflow-hidden">
+              {/* Produção Completa */}
+              <div className="flex flex-col p-8 rounded-xl bg-surface-container-high hover:bg-surface-variant transition-colors group relative overflow-hidden">
                 <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                  <span className="material-symbols-outlined text-7xl">album</span>
+                  <span className="material-symbols-outlined text-6xl">headphones</span>
                 </div>
-                <h4 className="font-headline text-xl font-bold mb-2">Pacote Álbum</h4>
-                <div className="text-4xl font-black text-primary mb-8 font-headline">R$ 3.500<span className="text-sm font-normal text-on-surface-variant">/projeto</span></div>
-                <ul className="space-y-4 mb-12 flex-grow z-10 relative">
-                  <li className="flex items-center gap-3 text-on-surface-variant">
+                <h4 className="font-headline text-lg font-bold mb-2">Produção Completa</h4>
+                <div className="text-3xl font-black text-primary mb-2 font-headline">R$ 450</div>
+                <span className="text-xs text-on-surface-variant font-bold uppercase tracking-widest mb-8">Rap, Funk, Drill</span>
+                <ul className="space-y-3 mb-10 flex-grow z-10 relative">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Estúdio Ilimitado (15 dias)
+                    Beat exclusivo
                   </li>
-                  <li className="flex items-center gap-3 text-on-surface-variant">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Produção Executiva
+                    Gravação + Mix & Master
                   </li>
-                  <li className="flex items-center gap-3 text-on-surface-variant">
+                  <li className="flex items-center gap-3 text-on-surface-variant text-sm">
                     <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Masterização p/ Streaming
-                  </li>
-                  <li className="flex items-center gap-3 text-on-surface-variant">
-                    <span className="material-symbols-outlined text-primary text-sm">check_circle</span>
-                    Gravação de Clipe Studio
+                    Entrega profissional
                   </li>
                 </ul>
-                <a
-                  href={`${whatsappBase}${encodeURIComponent("Salve! Gostaria de agendar o Pacote Álbum completo de R$ 3.500. Tenho um projeto grande.")}`}
+                <a 
+                  href={`${whatsappBase}${encodeURIComponent("Fala! Tenho interesse na Produção Completa (R$ 450). Quero saber mais sobre o processo.")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="relative z-10 w-full py-4 border border-outline-variant hover:border-primary hover:text-primary transition-all rounded-full font-bold text-center block"
+                  className="relative z-10 w-full py-3.5 border border-outline-variant hover:border-primary hover:text-primary transition-all rounded-full font-bold text-center block text-sm"
                 >
-                  Selecionar
+                  Agendar
                 </a>
               </div>
             </div>

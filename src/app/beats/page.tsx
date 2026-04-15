@@ -5,57 +5,20 @@ import { Footer } from "@/components/Footer";
 import { GlassPlayer } from "@/components/GlassPlayer";
 import { LicenseModal } from "@/components/LicenseModal";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useCart } from "@/contexts/CartContext";
 import { LicenseOption } from "@/contexts/CartContext";
+import { BEATS_CATALOG, GENRES, FEATURED_BEAT, Beat } from "@/data/beats";
 
 const WA = "https://wa.me/5519997791763?text=";
 
-const BEATS = [
-  {
-    id: 1,
-    title: "STREETS TALKING",
-    genre: "Trap",
-    bpm: 130,
-    key: "Sol Maior",
-    price: "R$ 149",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCOV__v3hZsUudxlWf3w53VaXSBQu6Xs0vqjMZH4K2Qebcu9VBxfClpJtxQBt3QImNgQV9b6IQXAnHsE2942XrC0xF-pUkh8ZzmZ-o5tgbmCwLuMKfVsWMSURB3b4nYHzs8UFGK3EXX9gEMB-8s0eDW1f6K7FKJpqcu0TmhyIE4xdptqyf9XCWAiVY4aVUtbiW3MshDldrhqxu219BrnTfis_jiCVluDZ2VSs-Zz2BL3YbU-F8DMBYKISmbi0C56Veuvf64LXAXfbo",
-  },
-  {
-    id: 2,
-    title: "COLD WORLD",
-    genre: "Drill",
-    bpm: 145,
-    key: "Dó# Menor",
-    price: "R$ 179",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuB8PFXIaM8vJLGyj6tzBiGzTZCsPEDQGOugPSGmCbYEvqTaFcqSAflvUdqY_eNJ0b-Q4dU8_ggK6CrWp_I8XihXHthxZ9CmTGhUXP20HTxV72GdFNlPNh_gwHM9E21rnwexoJHm5cXUItJ2MyuJ4-ymW5Hc8bay6ToojnQY86lXRQsUU4nSTKgRFLMVOFVIdfs9hSkU1hMsL3irrLhn0OWd1a_kPqyl0l_cCRpBM7KUzcjDgbxSUA7Oxnq3ccUepFwi1QD3Fj3LFnU",
-  },
-  {
-    id: 3,
-    title: "BAILE NIGHTS",
-    genre: "Funk",
-    bpm: 130,
-    key: "Fá Menor",
-    price: "R$ 119",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAHYY6MkNpna0xNeMmbsjJr9RuTc9suhT2gnBNPfagqkxpek8DHW67cCunwVE1r2TgKV4UNt2doPhzdeBiVWP5R3CEkb_4x5_5kGLqTPTeuKA2AXmUR7Vve7GCXXQCCVUU9dMf-0oL8laoIgv-d9Pd1ZBgM4-GB-hzwFY5BYpL-BO_PsU94YYCVxBFffk4SJVgl7HDpOHcwjAAleKz9xnLUdmnUUPwtmpc1-370cz0pA_VxnPA_o-4iUAbnEnI3pyRuDxqSJtFm-KU",
-  },
-  {
-    id: 4,
-    title: "VELVET SOUL",
-    genre: "R&B",
-    bpm: 95,
-    key: "Sib Maior",
-    price: "R$ 209",
-    img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDT5emSXzyG8oCfARnOEcwWwZZD7Ma0k-YmJ6jY-phyms8L43RGC06Ocq5Puw6vUwUmYw2H-CQ9sp5_z98Mdu4w988XXKLIwZMZ-QKwTMbANRjLe5CdN6XB6QNeek1APVSIsgShNoNJheEjbx6Z2GV88ZVvSBZY9QQJDMYuiwLxOb1Mbm37IiJpnlelHUAfIiDw5yZFdt3fU_Acq3tlLLnAedih_ppkUBxT3f9j9-24CmbCZTBf7gSsBhNFFOsPdj5hRKwLcUfUBL4",
-  },
-];
-
-const GENRES = ["Todos", "Trap", "Drill", "Funk", "R&B"];
+// Beats não-featured para o grid
+const BEATS = BEATS_CATALOG.filter((b) => !b.featured);
 
 export default function Beats() {
   const [activeGenre, setActiveGenre] = useState("Todos");
   const [search, setSearch] = useState("");
-  const [modalBeat, setModalBeat] = useState<(typeof BEATS)[0] | null>(null);
+  const [modalBeat, setModalBeat] = useState<Beat | null>(null);
   const { addToCart } = useCart();
 
   const filtered = BEATS.filter((b) => {
@@ -88,8 +51,8 @@ export default function Beats() {
             {/* Capa */}
             <div className="w-full md:w-72 lg:w-80 aspect-square relative rounded-2xl overflow-hidden flex-shrink-0 group shadow-[0_0_40px_rgba(35,218,237,0.1)]">
               <Image
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCMQrGxL2hArKhSQ1y7X-0nhfHMWorzFYqmAz8zqWaAZstoI7fZ0Y6lDYQ4LUUszFbfD4QdOP3yTnow2ehVplLTUl5k1rh35OuDCFKH57odpX_u6cvntvp1fcI1Ge6kY6Tvxeax1uTNTt-5mvSATKCEPfB3ReNfucg7NjB0GdiYkNDRvEpGRgN7WhV1obl4uKf354lKPhnQty4ZIw5NaBUenXZTBMhUu2INv8SfoY7rNn6Xlc1dlsXms44vBrnkHmyG2zesNn4qTPg"
-                alt="Cyber Punk Drill - Beat Destaque"
+                src={FEATURED_BEAT.img}
+                alt={`${FEATURED_BEAT.title} - Beat Destaque`}
                 fill
                 sizes="(max-width: 768px) 100vw, 320px"
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -105,10 +68,12 @@ export default function Beats() {
               <div>
                 <span className="text-primary font-bold tracking-widest text-xs uppercase mb-3 block">Beat do Mês</span>
                 <h1 className="text-5xl md:text-7xl font-black font-headline tracking-tighter leading-none mb-4 uppercase">
-                  CYBER PUNK <span className="text-primary">DRILL</span>
+                  {FEATURED_BEAT.title.split(" ").map((word, i, arr) =>
+                    i === arr.length - 1 ? <span key={i} className="text-primary">{word}</span> : <span key={i}>{word} </span>
+                  )}
                 </h1>
                 <p className="text-on-surface-variant text-lg max-w-xl leading-relaxed">
-                  Um instrumental pesado que combina synths futuristas com a percussão agressiva do UK Drill. Engenheirado para a elite.
+                  {FEATURED_BEAT.description}
                 </p>
               </div>
 
@@ -125,25 +90,15 @@ export default function Beats() {
 
               <div className="flex flex-wrap items-center gap-4">
                 <button
-                  onClick={() =>
-                    setModalBeat({
-                      id: 0,
-                      title: "CYBER PUNK DRILL",
-                      genre: "Drill",
-                      bpm: 140,
-                      key: "Ré# Menor",
-                      price: "R$ 179",
-                      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCMQrGxL2hArKhSQ1y7X-0nhfHMWorzFYqmAz8zqWaAZstoI7fZ0Y6lDYQ4LUUszFbfD4QdOP3yTnow2ehVplLTUl5k1rh35OuDCFKH57odpX_u6cvntvp1fcI1Ge6kY6Tvxeax1uTNTt-5mvSATKCEPfB3ReNfucg7NjB0GdiYkNDRvEpGRgN7WhV1obl4uKf354lKPhnQty4ZIw5NaBUenXZTBMhUu2INv8SfoY7rNn6Xlc1dlsXms44vBrnkHmyG2zesNn4qTPg",
-                    })
-                  }
+                  onClick={() => setModalBeat(FEATURED_BEAT)}
                   className="bg-primary text-on-primary font-black px-8 py-4 rounded-full flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_20px_rgba(35,218,237,0.3)] text-sm uppercase tracking-wide"
                 >
                   <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add_shopping_cart</span>
                   Adquirir Beat
                 </button>
                 <div className="flex gap-5 text-on-surface-variant text-sm">
-                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-primary text-base">speed</span>140 BPM</span>
-                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-primary text-base">music_note</span>Ré# Menor</span>
+                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-primary text-base">speed</span>{FEATURED_BEAT.bpm} BPM</span>
+                  <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-primary text-base">music_note</span>{FEATURED_BEAT.key}</span>
                 </div>
               </div>
             </div>

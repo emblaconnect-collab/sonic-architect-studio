@@ -7,12 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useAudio, MOCK_PLAYLIST } from "@/contexts/AudioContext";
 import { useState, useRef, useEffect } from "react";
-
-const BEAT_DO_MES = {
-  title: "Shadow Drill Vol. 4",
-  artist: "Prod. SonicArchitect",
-  url: "/audios/beat-do-mes.mp3",
-};
+import { FEATURED_BEAT } from "@/data/beats";
 
 export default function Portfolio() {
   const { playTrack } = useAudio();
@@ -26,7 +21,8 @@ export default function Portfolio() {
   const beatProgressRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const audio = new Audio(BEAT_DO_MES.url);
+    const audioUrl = FEATURED_BEAT.audio || "";
+    const audio = new Audio(audioUrl);
     beatAudioRef.current = audio;
 
     audio.addEventListener("timeupdate", () => {
@@ -204,14 +200,16 @@ export default function Portfolio() {
                 <div className="h-px flex-grow bg-outline-variant/20"></div>
               </div>
               <h2 className="text-4xl md:text-6xl font-headline font-black text-white uppercase tracking-tighter mb-6">
-                Shadow <span className="text-primary">Drill</span> Vol. 4
+                {FEATURED_BEAT.title.split(" ").map((word, i, arr) =>
+                  i === arr.length - 1 ? <span key={i} className="text-primary">{word}</span> : <span key={i}>{word} </span>
+                )}
               </h2>
               <p className="text-on-surface-variant mb-10 max-w-md text-lg leading-relaxed">
-                Um instrumental carregado de graves distorcidos e ambiência cinemática. Exclusivo para artistas que buscam o som das ruas de Londres.
+                {FEATURED_BEAT.description || "Um instrumental pesado que combina synths futuristas com a percussão agressiva do UK Drill. Engenheirado para a elite."}
               </p>
               <div className="flex flex-wrap gap-4">
                 <a 
-                  href={`${whatsappBase}${encodeURIComponent("Estou interessado no Beat Shadow Drill Vol.4 do portfólio. Ainda está disponível?")}`}
+                  href={`${whatsappBase}${encodeURIComponent(`Estou interessado no Beat "${FEATURED_BEAT.title}" do portfólio. Ainda está disponível?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-primary text-on-primary px-8 py-4 rounded-full font-headline font-black uppercase text-sm group shadow-[0_0_20px_rgba(35,218,237,0.2)] hover:scale-105 transition-transform active:scale-95"
@@ -220,7 +218,7 @@ export default function Portfolio() {
                   Adquirir Exclusiva
                 </a>
                 <a 
-                  href={`${whatsappBase}${encodeURIComponent("Salve! Pode me mandar a Demo do Shadow Drill Vol.4 pra eu testar umas rimas?")}`}
+                  href={`${whatsappBase}${encodeURIComponent(`Salve! Pode me mandar a Demo do "${FEATURED_BEAT.title}" pra eu testar umas rimas?`)}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 border border-outline-variant px-8 py-4 rounded-full font-headline font-black uppercase text-sm hover:bg-surface-container-highest hover:border-primary/50 transition-all hover:text-primary"

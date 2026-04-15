@@ -5,7 +5,7 @@ export function Footer() {
         
         <div>
           <div className="text-xl font-black text-primary mb-6 font-headline tracking-tighter">
-            SonicArchitect | KM29
+            SonicArchitect
           </div>
           <p className="text-on-surface-variant max-w-xs leading-relaxed mx-auto md:mx-0">
             O hub definitivo para a produção de música urbana. Onde a técnica encontra a alma da rua.

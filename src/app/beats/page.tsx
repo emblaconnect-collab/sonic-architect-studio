@@ -3,8 +3,11 @@
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { GlassPlayer } from "@/components/GlassPlayer";
+import { LicenseModal } from "@/components/LicenseModal";
 import Image from "next/image";
 import { useState } from "react";
+import { useCart } from "@/contexts/CartContext";
+import { LicenseOption } from "@/contexts/CartContext";
 
 const WA = "https://wa.me/5519997791763?text=";
 
@@ -52,12 +55,24 @@ const GENRES = ["Todos", "Trap", "Drill", "Funk", "R&B"];
 export default function Beats() {
   const [activeGenre, setActiveGenre] = useState("Todos");
   const [search, setSearch] = useState("");
+  const [modalBeat, setModalBeat] = useState<(typeof BEATS)[0] | null>(null);
+  const { addToCart } = useCart();
 
   const filtered = BEATS.filter((b) => {
     const matchGenre = activeGenre === "Todos" || b.genre === activeGenre;
     const matchSearch = b.title.toLowerCase().includes(search.toLowerCase());
     return matchGenre && matchSearch;
   });
+
+  const handleAddToCart = (beat: (typeof BEATS)[0], license: LicenseOption) => {
+    addToCart({
+      beatId: beat.id,
+      title: beat.title,
+      genre: beat.genre,
+      img: beat.img,
+      license,
+    });
+  };
 
   return (
     <>
@@ -109,15 +124,23 @@ export default function Beats() {
               </div>
 
               <div className="flex flex-wrap items-center gap-4">
-                <a
-                  href={`${WA}${encodeURIComponent("Olá! Tenho interesse no beat CYBER PUNK DRILL. Quero saber sobre licenciamento e valores.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() =>
+                    setModalBeat({
+                      id: 0,
+                      title: "CYBER PUNK DRILL",
+                      genre: "Drill",
+                      bpm: 140,
+                      key: "Ré# Menor",
+                      price: "R$ 179",
+                      img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCMQrGxL2hArKhSQ1y7X-0nhfHMWorzFYqmAz8zqWaAZstoI7fZ0Y6lDYQ4LUUszFbfD4QdOP3yTnow2ehVplLTUl5k1rh35OuDCFKH57odpX_u6cvntvp1fcI1Ge6kY6Tvxeax1uTNTt-5mvSATKCEPfB3ReNfucg7NjB0GdiYkNDRvEpGRgN7WhV1obl4uKf354lKPhnQty4ZIw5NaBUenXZTBMhUu2INv8SfoY7rNn6Xlc1dlsXms44vBrnkHmyG2zesNn4qTPg",
+                    })
+                  }
                   className="bg-primary text-on-primary font-black px-8 py-4 rounded-full flex items-center gap-2 hover:scale-105 transition-transform shadow-[0_0_20px_rgba(35,218,237,0.3)] text-sm uppercase tracking-wide"
                 >
-                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>shopping_cart</span>
+                  <span className="material-symbols-outlined" style={{ fontVariationSettings: "'FILL' 1" }}>add_shopping_cart</span>
                   Adquirir Beat
-                </a>
+                </button>
                 <div className="flex gap-5 text-on-surface-variant text-sm">
                   <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-primary text-base">speed</span>140 BPM</span>
                   <span className="flex items-center gap-1.5"><span className="material-symbols-outlined text-primary text-base">music_note</span>Ré# Menor</span>
@@ -180,14 +203,9 @@ export default function Beats() {
                       loading="lazy"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <a
-                      href={`${WA}${encodeURIComponent(`Olá! Tenho interesse no beat "${beat.title}". Ainda disponível?`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity"
-                    >
+                    <div className="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
                       <span className="material-symbols-outlined text-primary" style={{ fontSize: 56, fontVariationSettings: "'FILL' 1" }}>play_circle</span>
-                    </a>
+                    </div>
                   </div>
                   <div className="space-y-3">
                     <div>
@@ -196,14 +214,12 @@ export default function Beats() {
                     </div>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-primary font-black text-lg">{beat.price}</span>
-                      <a
-                        href={`${WA}${encodeURIComponent(`Quero adquirir o beat "${beat.title}". Qual o processo?`)}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      <button
+                        onClick={() => setModalBeat(beat)}
                         className="bg-surface-container-lowest hover:bg-primary hover:text-on-primary p-2.5 rounded-full transition-all group/btn border border-white/5"
                       >
                         <span className="material-symbols-outlined text-primary group-hover/btn:text-on-primary text-xl">add_shopping_cart</span>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -354,6 +370,16 @@ export default function Beats() {
         </section>
 
       </main>
+
+      {/* LicenseModal */}
+      {modalBeat && (
+        <LicenseModal
+          beat={modalBeat}
+          isOpen={!!modalBeat}
+          onClose={() => setModalBeat(null)}
+          onSelect={(license) => handleAddToCart(modalBeat, license)}
+        />
+      )}
 
       <Footer />
       <GlassPlayer />

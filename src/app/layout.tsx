@@ -18,6 +18,8 @@ export const metadata: Metadata = {
 };
 
 import { AudioProvider } from "@/contexts/AudioContext";
+import { CartProvider } from "@/contexts/CartContext";
+import { CartDrawer } from "@/components/CartDrawer";
 
 export default function RootLayout({
   children,
@@ -32,9 +34,12 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body bg-surface text-on-surface selection:bg-primary/30 selection:text-primary min-h-full flex flex-col pb-[152px] md:pb-28">
-        <AudioProvider>
-          {children}
-        </AudioProvider>
+        <CartProvider>
+          <AudioProvider>
+            {children}
+            <CartDrawer />
+          </AudioProvider>
+        </CartProvider>
       </body>
     </html>
   );

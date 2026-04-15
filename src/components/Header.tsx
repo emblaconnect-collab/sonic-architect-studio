@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCart } from "@/contexts/CartContext";
 
 export function Header() {
   const pathname = usePathname();
+  const { totalItems, toggleDrawer } = useCart();
 
   // Helper to determine if a route is active
   const isActive = (path: string) => pathname === path;
@@ -51,6 +53,18 @@ export function Header() {
           </div>
           
           <div className="flex gap-4 items-center">
+            {/* Cart Icon */}
+            <button
+              onClick={toggleDrawer}
+              className="relative text-on-surface-variant hover:text-primary transition-colors duration-200 active:scale-95"
+            >
+              <span className="material-symbols-outlined text-2xl">shopping_cart</span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-primary text-on-primary text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_8px_rgba(35,218,237,0.5)]">
+                  {totalItems}
+                </span>
+              )}
+            </button>
             <Link href="/contato" className="bg-primary text-on-primary-container px-6 py-2.5 rounded-full font-bold font-headline tracking-tight scale-95 duration-200 ease-in-out hover:brightness-110 shadow-[0_0_15px_rgba(35,218,237,0.3)]">
               Agendar Sessão
             </Link>
@@ -76,10 +90,19 @@ export function Header() {
           <span className="material-symbols-outlined">headphones</span>
           <span className="text-[9px] font-bold uppercase">Beats</span>
         </Link>
-        <Link className={`flex flex-col items-center justify-center gap-1 h-full flex-1 ${isActive("/contato") ? "text-primary" : "text-on-surface-variant hover:text-primary transition-colors"}`} href="/contato">
-          <span className="material-symbols-outlined">alternate_email</span>
-          <span className="text-[9px] font-bold uppercase">Contato</span>
-        </Link>
+        {/* Cart Mobile */}
+        <button
+          onClick={toggleDrawer}
+          className={`flex flex-col items-center justify-center gap-1 h-full flex-1 relative text-on-surface-variant hover:text-primary transition-colors`}
+        >
+          <span className="material-symbols-outlined">shopping_cart</span>
+          {totalItems > 0 && (
+            <span className="absolute top-2 right-1/4 bg-primary text-on-primary text-[8px] font-black w-4 h-4 rounded-full flex items-center justify-center">
+              {totalItems}
+            </span>
+          )}
+          <span className="text-[9px] font-bold uppercase">Carrinho</span>
+        </button>
       </div>
     </>
   );

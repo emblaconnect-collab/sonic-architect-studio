@@ -25,7 +25,7 @@ const RELEASES: ReleaseItem[] = [
     artist: "Caio Ocean",
     title: "BNP",
     description: "Boombap · Hip Hop Underground",
-    cover: "/caio-ocean-capa.png",
+    cover: "/covers/caio-ocean-capa.png",
     spotifyUrl: "https://open.spotify.com/intl-pt/track/430YJ1fYo7y9HIJmNpRTDp",
     youtubeUrl: "https://www.youtube.com/watch?v=zc4U5LiE2-k",
   },
@@ -35,7 +35,7 @@ const RELEASES: ReleaseItem[] = [
     artist: "Big Blakk ft. MALU",
     title: "Dinheiro não sai de moda",
     description: "R&B / Drill · Hip Hop Underground",
-    cover: "/capa-big-blakk.png",
+    cover: "/covers/capa-big-blakk.png",
     spotifyUrl: "https://open.spotify.com/intl-pt/track/6Y6wA87vTnc7x7Qg39zVO2",
     youtubeUrl: "https://www.youtube.com/watch?v=qjcm5akW71w",
   },
@@ -45,17 +45,17 @@ const RELEASES: ReleaseItem[] = [
     artist: "Digga D",
     title: "DPMO",
     description: "UK Drill · UK Rap",
-    cover: "/capa-digga-d.png",
+    cover: "/covers/capa-digga-d.png",
     spotifyUrl: "https://open.spotify.com/intl-pt/album/3xufC9z1KXYbBVWO66rG2Y",
     youtubeUrl: "https://www.youtube.com/watch?v=lQ9WPaXFRD0",
   },
   {
     id: 4,
-    label: "Vibe",
+    label: "Primeiro Ato",
     artist: "Gabryyzera",
     title: "Primeiro Ato",
     description: "Boombap · Hip Hop Underground",
-    cover: "/capa-vibe-retro.jpeg",
+    cover: "/covers/capa-gabryyzera.jpeg",
     spotifyUrl: "https://open.spotify.com/",
     youtubeUrl: "https://www.youtube.com/",
   },
@@ -363,3 +363,4 @@ export default function Portfolio() {
     </>
   );
 }
+

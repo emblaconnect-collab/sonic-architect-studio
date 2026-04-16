@@ -157,7 +157,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-xl overflow-hidden mb-6 relative">
                 <Image 
-                  src="/caio-ocean-capa.png"
+                  src="/covers/caio-ocean-capa.png"
                   alt="BNP - Caio Ocean" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
@@ -180,7 +180,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-xl overflow-hidden mb-6 relative">
                 <Image 
-                  src="/capa-big-blakk.png" 
+                  src="/covers/capa-big-blakk.png" 
                   alt="Dinheiro não sai de moda - Big Blakk" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
@@ -203,7 +203,7 @@ export default function Home() {
             >
               <div className="aspect-square rounded-xl overflow-hidden mb-6 relative">
                 <Image 
-                  src="/capa-digga-d.png" 
+                  src="/covers/capa-digga-d.png" 
                   alt="DPMO - Digga D" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
@@ -221,11 +221,11 @@ export default function Home() {
 
 
             {/* Release 4 */}
-            <div className="min-w-[300px] md:min-w-[400px] group cursor-pointer shrink-0">
+            <div onClick={() => handlePlayDefault(3)} className="min-w-[300px] md:min-w-[400px] group cursor-pointer shrink-0">
               <div className="aspect-square rounded-xl overflow-hidden mb-6 relative">
                 <Image 
-                  src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtIuW8W1KFV2trgjjkcvVXa2kttnMMgePz_tTX0hIOgcSL1Ed3JL9BTUK3-cxoBJAlji1aA5HonLQBxcXpNgMqXwuYcRggBxxJcIo5yWddGjdUBDhq-IQWwbwTgkWVcdBDO_MvU6AaMNILehLJqn7IpfuKxUlREoE2tf1ED86F_2_X_h_5MVxwcgnkHRD-Hnjau9d_61CZcpMis4ZFYGqC-a8FXflFEke5hCwgymwJWKOUAslahhBvYH0lhxa-08N_FyKyKMU_L8s" 
-                  alt="Vibe Retro Cover" 
+                  src="/covers/capa-gabryyzera.jpeg" 
+                  alt="Primeiro Ato - Gabryyzera" 
                   fill 
                   sizes="(max-width: 768px) 300px, 400px"
                   loading="lazy"
@@ -235,8 +235,9 @@ export default function Home() {
                   <span className="material-symbols-outlined text-6xl text-white">play_circle</span>
                 </div>
               </div>
-              <h4 className="text-xl font-bold font-headline uppercase mb-1">Vibe Retro</h4>
-              <p className="text-on-surface-variant text-sm font-medium">DJ Low-Fi x SonicArchitect</p>
+              <h4 className="text-xl font-bold font-headline uppercase mb-1">Primeiro Ato</h4>
+              <p className="text-on-surface-variant text-sm font-medium">Gabryyzera</p>
+              <p className="text-primary/60 text-xs font-medium mt-0.5 uppercase tracking-widest">Boombap · Hip Hop Underground</p>
             </div>
 
           </div>
@@ -349,3 +350,4 @@ export default function Home() {
     </>
   );
 }
+

@@ -42,7 +42,7 @@ export const MOCK_PLAYLIST: TrackData[] = [
     artist: "Caio Ocean",
     genre: "Boombap · Hip Hop Underground",
     url: "/audios/caio-ocaen-bnp.mp3",
-    cover: "/caio-ocean-capa.png",
+    cover: "/covers/caio-ocean-capa.png",
   },
   {
     id: "2",
@@ -50,7 +50,7 @@ export const MOCK_PLAYLIST: TrackData[] = [
     artist: "Big Blakk",
     genre: "R&B / Drill · Hip Hop Underground",
     url: "/audios/big-blakk.mp3",
-    cover: "/capa-big-blakk.png",
+    cover: "/covers/capa-big-blakk.png",
   },
   {
     id: "3",
@@ -58,15 +58,15 @@ export const MOCK_PLAYLIST: TrackData[] = [
     artist: "Digga D",
     genre: "UK Drill · UK Rap",
     url: "/audios/digga-d-dpmo.mp3",
-    cover: "/capa-digga-d.png",
+    cover: "/covers/capa-digga-d.png",
   },
   {
     id: "4",
     title: "Primeiro Ato",
     artist: "Gabryyzera",
     genre: "Boombap · Hip Hop Underground",
-    url: "/audios/vibe-retro.mp3",
-    cover: "/capa-vibe-retro.jpeg",
+    url: "/audios/Gabryyzera - Primeiro Ato.mpeg",
+    cover: "/covers/capa-gabryyzera.jpeg",
   },
 ];
 
@@ -258,3 +258,4 @@ export function useAudio() {
   }
   return context;
 }
+

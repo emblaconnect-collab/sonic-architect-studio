@@ -300,10 +300,10 @@ export default function Home() {
               </h2>
               <div className="space-y-6 text-on-surface-variant text-lg leading-relaxed">
                 <p>
-                  Fundado pelo produtor e engenheiro **Knucks**, o SonicArchitect nasceu da necessidade de um som que não apenas ocupasse espaço, mas que dominasse a cena. Localizado no coração pulsante de São Paulo, somos o ponto de convergência entre a técnica refinada e a atitude das ruas.
+                  Fundado pelo produtor e engenheiro <strong>Knucks</strong>, o SonicArchitect nasceu da necessidade de um som que não apenas ocupasse espaço, mas que dominasse a cena. Localizado no coração pulsante de São Paulo, somos o ponto de convergência entre a técnica refinada e a atitude das ruas.
                 </p>
                 <p>
-                  Nossa filosofia é simples: **fidelidade absoluta**. Trabalhamos com equipamentos de ponta e acústica cirúrgica para garantir que cada grave bata com precisão e cada lírica tenha a clareza que merece.
+                  Nossa filosofia é simples: <strong>fidelidade absoluta</strong>. Trabalhamos com equipamentos de ponta e acústica cirúrgica para garantir que cada grave bata com precisão e cada lírica tenha a clareza que merece.
                 </p>
               </div>
               

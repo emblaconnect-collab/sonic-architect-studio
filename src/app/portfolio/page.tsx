@@ -9,9 +9,10 @@ import { FEATURED_BEAT } from "@/data/beats";
 
 interface ReleaseItem {
   id: number;
+  label: string;
   artist: string;
   title: string;
-  genre: "Trap" | "Drill" | "Funk" | "R&B";
+  description: string;
   cover: string;
   spotifyUrl: string;
   youtubeUrl: string;
@@ -20,40 +21,48 @@ interface ReleaseItem {
 const RELEASES: ReleaseItem[] = [
   {
     id: 1,
-    artist: "Artista Trap",
-    title: "Cidades de Neon",
-    genre: "Trap",
-    cover:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCo8NF5T5vrHHVq-K3vaWr4NlM19unyMX_bUcqYF69jwMgEMFqTVSbs31nqzoXNSifeTVTFV4bNQsj3kdzwWajWKHb_q9W-Hq-3E7u4Z0eszftcx9eHwfgIpvvUBy45sCtOlTtCUmAMMSA2G0VZt3vmUWGpS-8yTIl72eBb3RDKlwCgfNhG_5ZnvMnUeOPYVLJ-mBqGC3UaMaZA2wbOWDNa1Yi5zMTui0o8pk3n1PUNQk7WJbLVyQ9KgrjWQntQHhOZuirD6tXSXvw",
+    label: "BNP",
+    artist: "Caio Ocean",
+    title: "BNP",
+    description: "Boombap · Hip Hop Underground",
+    cover: "/caio-ocean-capa.png",
     spotifyUrl: "https://open.spotify.com/",
     youtubeUrl: "https://www.youtube.com/",
   },
   {
     id: 2,
-    artist: "Coletivo Drill",
-    title: "Noites de Drill",
-    genre: "Drill",
-    cover:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDizzx7N7oQjf0D_61NNG6_BIISo87qSDj6I0DeH3tPXn8EB98XC-p30nPXECzsWw6gD29Cd8xGrDcghgUjHtpWzfQcWBlvJBPxfkyaRCcpuuzym_IXKIEqk1xCX2x4pEwc8LVSvNR2AfqPAst5aH8MqZdSyD3eKBIQxPhUUZg7gl_aVUvAsRqz1OPuAMNCpJTTP-sdCfsqNH1V8CSmmc1gI5XKbKp7mwNAPrCxvKp2yd-EuH3vxnykl5M3D0sDVCbteuK-AWDy9VE",
+    label: "Destaque",
+    artist: "Big Blakk ft. MALU",
+    title: "Dinheiro não sai de moda",
+    description: "R&B / Drill · Hip Hop Underground",
+    cover: "/capa-big-blakk.png",
     spotifyUrl: "https://open.spotify.com/",
     youtubeUrl: "https://www.youtube.com/",
   },
   {
     id: 3,
-    artist: "Impacto Real",
-    title: "Impacto Real",
-    genre: "R&B",
+    label: "DPMO",
+    artist: "Digga D",
+    title: "DPMO",
+    description: "UK Drill · UK Rap",
+    cover: "/capa-digga-d.png",
+    spotifyUrl: "https://open.spotify.com/",
+    youtubeUrl: "https://www.youtube.com/",
+  },
+  {
+    id: 4,
+    label: "Vibe",
+    artist: "DJ Low-Fi x SonicArchitect",
+    title: "Vibe Retro",
+    description: "Lo-Fi",
     cover:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuDpMkQ6KL8uAm_5m_zRSy-PKWqfOYDMOUFFD8otNQyqwajTWuWjxvJbT6OxWF6OreOsDzpwWrHLdtLHDUY48SyCUUGdBnexEqcbJ_orDnzJDH7Jcf7c_lD4JnLeioUmeDr1EqKvX50XP_80GoMA6dKFauV_Ljib-eXq7oS_V9yc-VH2XM-7L2OQTDxdXEFYGWiNMl0mqp41Ty-_jsp5eA8qxizb4THW4pRo7gqHk0biV8UA54jOUSYEVxygLSRRqk-69FXZgtSHWUg",
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCtIuW8W1KFV2trgjjkcvVXa2kttnMMgePz_tTX0hIOgcSL1Ed3JL9BTUK3-cxoBJAlji1aA5HonLQBxcXpNgMqXwuYcRggBxxJcIo5yWddGjdUBDhq-IQWwbwTgkWVcdBDO_MvU6AaMNILehLJqn7IpfuKxUlREoE2tf1ED86F_2_X_h_5MVxwcgnkHRD-Hnjau9d_61CZcpMis4ZFYGqC-a8FXflFEke5hCwgymwJWKOUAslahhBvYH0lhxa-08N_FyKyKMU_L8s",
     spotifyUrl: "https://open.spotify.com/",
     youtubeUrl: "https://www.youtube.com/",
   },
 ];
 
-const GENRE_FILTERS = ["Todos", "Trap", "Drill", "Funk", "R&B"] as const;
-
 export default function Portfolio() {
-  const [activeGenre, setActiveGenre] = useState<(typeof GENRE_FILTERS)[number]>("Todos");
 
   // Inline player state for Beat do Mês
   const beatAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -106,10 +115,6 @@ export default function Portfolio() {
   };
 
   const whatsappBase = "https://wa.me/5519997791763?text=";
-  const filteredReleases =
-    activeGenre === "Todos"
-      ? RELEASES
-      : RELEASES.filter((release) => release.genre === activeGenre);
 
   return (
     <>
@@ -141,25 +146,6 @@ export default function Portfolio() {
           </div>
         </section>
 
-        {/* Filter Bar */}
-        <section className="px-8 max-w-screen-2xl mx-auto mb-12">
-          <div className="flex items-center gap-4 overflow-x-auto no-scrollbar pb-4">
-            {GENRE_FILTERS.map((filter) => (
-              <button
-                key={filter}
-                onClick={() => setActiveGenre(filter)}
-                className={`px-8 py-3 rounded-full font-headline font-bold uppercase text-sm whitespace-nowrap transition-all ${
-                  activeGenre === filter
-                    ? "bg-primary text-on-primary shadow-[0_0_15px_rgba(35,218,237,0.2)]"
-                    : "bg-surface-container-highest text-on-surface-variant hover:text-white hover:bg-surface-bright"
-                }`}
-              >
-                {filter}
-              </button>
-            ))}
-          </div>
-        </section>
-
         {/* Portfolio Releases Grid */}
         <section className="px-8 max-w-screen-2xl mx-auto mb-32">
           <div className="flex items-end justify-between mb-8 gap-6 flex-wrap">
@@ -172,8 +158,8 @@ export default function Portfolio() {
               </p>
             </div>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredReleases.map((release) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
+            {RELEASES.map((release) => (
               <div
                 key={release.id}
                 className="group relative aspect-square overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-500 hover:scale-[1.02]"
@@ -187,31 +173,41 @@ export default function Portfolio() {
                   className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute bottom-0 left-0 p-6 w-full">
                   <span className="text-primary font-headline font-bold uppercase text-xs tracking-widest mb-2 block">
-                    {release.artist}
+                    {release.label}
                   </span>
-                  <h3 className="text-2xl font-headline font-black text-white uppercase mb-4 tracking-tight">
+                  <h3 className="text-xl font-headline font-black text-white uppercase mb-1 tracking-tight leading-tight">
                     {release.title}
                   </h3>
-                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300">
+                  <p className="text-white text-lg leading-tight mb-1">
+                    {release.artist}
+                  </p>
+                  <p className="text-primary text-xs uppercase tracking-widest mb-4">
+                    {release.description}
+                  </p>
+                  <div className="flex gap-3">
                     <a
                       href={release.spotifyUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors"
+                      aria-label={`Ouvir ${release.title} no Spotify`}
+                      className="w-12 h-12 rounded-xl bg-[#1DB954] hover:brightness-110 transition-colors flex items-center justify-center"
                     >
-                      <span className="material-symbols-outlined text-sm">music_note</span>
-                      Spotify
+                      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#0B0F13" d="M12 1a11 11 0 100 22 11 11 0 000-22zm4.83 15.85a.69.69 0 01-.95.23 9.44 9.44 0 00-4.8-1.27 10.1 10.1 0 00-2.75.37.69.69 0 11-.36-1.34 11.5 11.5 0 013.11-.42c1.95 0 3.86.5 5.48 1.44.33.2.44.62.27.99zm1.24-2.77a.86.86 0 01-1.18.3 11.66 11.66 0 00-5.9-1.53c-1.1 0-2.18.15-3.2.45a.86.86 0 01-.5-1.65 13.58 13.58 0 013.7-.52c2.44 0 4.84.62 6.87 1.79.42.24.56.76.31 1.16zm.12-2.9a14.25 14.25 0 00-7.24-1.84c-1.3 0-2.58.17-3.8.5a1.03 1.03 0 01-.53-2c1.4-.37 2.86-.56 4.33-.56 2.82 0 5.6.7 7.95 2.07a1.03 1.03 0 11-1.03 1.83z"/>
+                      </svg>
                     </a>
                     <a
                       href={release.youtubeUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-2 border border-white/30 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase hover:border-primary hover:text-primary transition-colors"
+                      aria-label={`Assistir ${release.title} no YouTube`}
+                      className="w-12 h-12 rounded-xl bg-[#FF0000] hover:brightness-110 transition-colors flex items-center justify-center"
                     >
-                      <span className="material-symbols-outlined text-sm">play_circle</span>
-                      YouTube
+                      <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+                        <path fill="#FFFFFF" d="M19.62 7.43a2.52 2.52 0 00-1.77-1.79C16.3 5.23 12 5.23 12 5.23s-4.3 0-5.85.41a2.52 2.52 0 00-1.77 1.79C4 9.01 4 12 4 12s0 2.99.38 4.57c.2.8.84 1.44 1.77 1.79 1.55.41 5.85.41 5.85.41s4.3 0 5.85-.41a2.52 2.52 0 001.77-1.79C20 14.99 20 12 20 12s0-2.99-.38-4.57zM10.6 15.03V8.97L15.2 12l-4.6 3.03z"/>
+                      </svg>
                     </a>
                   </div>
                 </div>

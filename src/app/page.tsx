@@ -280,42 +280,42 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="sobre" className="py-32 bg-surface relative overflow-hidden">
-          <div className="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(0,0,0,0.5)] border border-white/5">
-              <Image 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTXfLgN9kF9kF9zL9l-E0pL-qXF6gQ-q9-9E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E-E"
-                alt="Portrait of the head engineer at work in a dark studio room with orange and teal accent lights"
-                fill
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                loading="lazy"
-                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent opacity-60"></div>
-            </div>
-            
-            <div className="space-y-8">
-              <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs">Nossa História</span>
-              <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter uppercase leading-none">
+        <section id="sobre" className="relative overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
+              src="/background-nossa-historia.png"
+              alt="Nossa historia SonicArchitect"
+              fill
+              sizes="100vw"
+              loading="lazy"
+              className="object-cover"
+            />
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/40 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/35" />
+
+          <div className="relative z-10 min-h-[620px] md:min-h-[680px] max-w-screen-2xl mx-auto px-8 py-24 md:py-32 flex items-center justify-end">
+            <div className="w-full max-w-3xl md:max-w-2xl space-y-7">
+              <span className="text-primary font-bold uppercase tracking-[0.3em] text-xs">Nossa Historia</span>
+              <h2 className="text-4xl md:text-6xl font-black font-headline tracking-tighter uppercase leading-none text-white">
                 ENGENHARIA SONORA <br/>PARA A <span className="text-primary">ELITE URBANA.</span>
               </h2>
-              <div className="space-y-6 text-on-surface-variant text-lg leading-relaxed">
+              <div className="space-y-5 text-white/85 text-lg leading-relaxed">
                 <p>
-                  Fundado pelo produtor e engenheiro <strong>Knucks</strong>, o SonicArchitect nasceu da necessidade de um som que não apenas ocupasse espaço, mas que dominasse a cena. Localizado no coração pulsante de São Paulo, somos o ponto de convergência entre a técnica refinada e a atitude das ruas.
+                  Fundado pelo produtor e engenheiro <strong>Knucks</strong>, o SonicArchitect nasceu da necessidade de um som que nao apenas ocupasse espaco, mas que dominasse a cena. Localizado no coracao pulsante de Sao Paulo, somos o ponto de convergencia entre a tecnica refinada e a atitude das ruas.
                 </p>
                 <p>
-                  Nossa filosofia é simples: <strong>fidelidade absoluta</strong>. Trabalhamos com equipamentos de ponta e acústica cirúrgica para garantir que cada grave bata com precisão e cada lírica tenha a clareza que merece.
+                  Nossa filosofia e simples: <strong>fidelidade absoluta</strong>. Trabalhamos com equipamentos de ponta e acustica cirurgica para garantir que cada grave bata com precisao e cada lirica tenha a clareza que merece.
                 </p>
               </div>
-              
-              <div className="grid grid-cols-2 gap-8 pt-8 border-t border-white/5">
+              <div className="grid grid-cols-2 gap-8 pt-7 border-t border-white/20">
                 <div>
                   <h4 className="text-white font-headline font-black text-3xl mb-1">500+</h4>
-                  <p className="text-on-surface-variant text-xs uppercase tracking-widest font-bold">Faixas Produzidas</p>
+                  <p className="text-white/75 text-xs uppercase tracking-widest font-bold">Faixas Produzidas</p>
                 </div>
                 <div>
                   <h4 className="text-white font-headline font-black text-3xl mb-1">15M+</h4>
-                  <p className="text-on-surface-variant text-xs uppercase tracking-widest font-bold">Total de Streams</p>
+                  <p className="text-white/75 text-xs uppercase tracking-widest font-bold">Total de Streams</p>
                 </div>
               </div>
             </div>

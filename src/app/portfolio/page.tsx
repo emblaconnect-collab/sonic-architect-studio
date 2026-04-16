@@ -54,9 +54,8 @@ const RELEASES: ReleaseItem[] = [
     label: "Vibe",
     artist: "DJ Low-Fi x SonicArchitect",
     title: "Vibe Retro",
-    description: "Lo-Fi",
-    cover:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuCtIuW8W1KFV2trgjjkcvVXa2kttnMMgePz_tTX0hIOgcSL1Ed3JL9BTUK3-cxoBJAlji1aA5HonLQBxcXpNgMqXwuYcRggBxxJcIo5yWddGjdUBDhq-IQWwbwTgkWVcdBDO_MvU6AaMNILehLJqn7IpfuKxUlREoE2tf1ED86F_2_X_h_5MVxwcgnkHRD-Hnjau9d_61CZcpMis4ZFYGqC-a8FXflFEke5hCwgymwJWKOUAslahhBvYH0lhxa-08N_FyKyKMU_L8s",
+    description: "Boombap · Hip Hop Underground",
+    cover: "/capa-vibe-retro.jpeg",
     spotifyUrl: "https://open.spotify.com/",
     youtubeUrl: "https://www.youtube.com/",
   },

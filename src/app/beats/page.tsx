@@ -21,13 +21,50 @@ export default function Beats() {
   const [modalBeat, setModalBeat] = useState<Beat | null>(null);
   const { addToCart } = useCart();
 
+  // ── Audio inline (sem player global) ──
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [playingId, setPlayingId] = useState<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current.src = "";
+      }
+    };
+  }, []);
+
+  const togglePlay = (beat: Beat) => {
+    if (!beat.audio) return;
+
+    // Se já tá tocando esse, pausa
+    if (playingId === beat.id) {
+      audioRef.current?.pause();
+      setPlayingId(null);
+      return;
+    }
+
+    // Para o anterior
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.src = "";
+    }
+
+    // Cria novo audio e toca
+    const audio = new Audio(beat.audio);
+    audioRef.current = audio;
+    audio.addEventListener("ended", () => setPlayingId(null));
+    audio.play().catch(() => {});
+    setPlayingId(beat.id);
+  };
+
   const filtered = BEATS.filter((b) => {
     const matchGenre = activeGenre === "Todos" || b.genre === activeGenre;
     const matchSearch = b.title.toLowerCase().includes(search.toLowerCase());
     return matchGenre && matchSearch;
   });
 
-  const handleAddToCart = (beat: (typeof BEATS)[0], license: LicenseOption) => {
+  const handleAddToCart = (beat: Beat, license: LicenseOption) => {
     addToCart({
       beatId: beat.id,
       title: beat.title,
@@ -48,8 +85,11 @@ export default function Beats() {
           <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-primary/10 to-transparent blur-3xl rounded-full translate-x-1/2 -translate-y-1/4 pointer-events-none" />
 
           <div className="relative bg-surface-container rounded-3xl p-6 md:p-12 border border-white/5 flex flex-col md:flex-row gap-10 items-center">
-            {/* Capa */}
-            <div className="w-full md:w-72 lg:w-80 aspect-square relative rounded-2xl overflow-hidden flex-shrink-0 group shadow-[0_0_40px_rgba(35,218,237,0.1)]">
+            {/* Capa — clique pra ouvir */}
+            <div
+              onClick={() => togglePlay(FEATURED_BEAT)}
+              className="w-full md:w-72 lg:w-80 aspect-square relative rounded-2xl overflow-hidden flex-shrink-0 group shadow-[0_0_40px_rgba(35,218,237,0.1)] cursor-pointer"
+            >
               <Image
                 src={FEATURED_BEAT.img}
                 alt={`${FEATURED_BEAT.title} - Beat Destaque`}
@@ -58,8 +98,10 @@ export default function Beats() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
                 priority
               />
-              <div className="absolute inset-0 bg-background/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                <span className="material-symbols-outlined text-primary" style={{ fontSize: 72, fontVariationSettings: "'FILL' 1" }}>play_circle</span>
+              <div className={`absolute inset-0 bg-background/30 flex items-center justify-center transition-opacity ${playingId === FEATURED_BEAT.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                <span className="material-symbols-outlined text-primary" style={{ fontSize: 72, fontVariationSettings: "'FILL' 1" }}>
+                  {playingId === FEATURED_BEAT.id ? "pause_circle" : "play_circle"}
+                </span>
               </div>
             </div>
 
@@ -149,7 +191,10 @@ export default function Beats() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
               {filtered.map((beat) => (
                 <div key={beat.id} className="bg-surface-container-high rounded-2xl p-4 group hover:bg-surface-bright transition-all duration-300 border border-white/0 hover:border-primary/10">
-                  <div className="relative aspect-square rounded-xl overflow-hidden mb-5 shadow-lg">
+                  <div
+                    onClick={() => togglePlay(beat)}
+                    className="relative aspect-square rounded-xl overflow-hidden mb-5 shadow-lg cursor-pointer"
+                  >
                     <Image
                       src={beat.img}
                       alt={beat.title}
@@ -158,8 +203,10 @@ export default function Beats() {
                       loading="lazy"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-background/50 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
-                      <span className="material-symbols-outlined text-primary" style={{ fontSize: 56, fontVariationSettings: "'FILL' 1" }}>play_circle</span>
+                    <div className={`absolute inset-0 bg-background/50 flex items-center justify-center transition-opacity ${playingId === beat.id ? "opacity-100" : "opacity-0 group-hover:opacity-100"}`}>
+                      <span className="material-symbols-outlined text-primary" style={{ fontSize: 56, fontVariationSettings: "'FILL' 1" }}>
+                        {playingId === beat.id ? "pause_circle" : "play_circle"}
+                      </span>
                     </div>
                   </div>
                   <div className="space-y-3">

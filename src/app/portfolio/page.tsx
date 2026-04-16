@@ -4,13 +4,56 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { GlassPlayer } from "@/components/GlassPlayer";
 import Image from "next/image";
-import Link from "next/link";
-import { useAudio, MOCK_PLAYLIST } from "@/contexts/AudioContext";
 import { useState, useRef, useEffect } from "react";
 import { FEATURED_BEAT } from "@/data/beats";
 
+interface ReleaseItem {
+  id: number;
+  artist: string;
+  title: string;
+  genre: "Trap" | "Drill" | "Funk" | "R&B";
+  cover: string;
+  spotifyUrl: string;
+  youtubeUrl: string;
+}
+
+const RELEASES: ReleaseItem[] = [
+  {
+    id: 1,
+    artist: "Artista Trap",
+    title: "Cidades de Neon",
+    genre: "Trap",
+    cover:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCo8NF5T5vrHHVq-K3vaWr4NlM19unyMX_bUcqYF69jwMgEMFqTVSbs31nqzoXNSifeTVTFV4bNQsj3kdzwWajWKHb_q9W-Hq-3E7u4Z0eszftcx9eHwfgIpvvUBy45sCtOlTtCUmAMMSA2G0VZt3vmUWGpS-8yTIl72eBb3RDKlwCgfNhG_5ZnvMnUeOPYVLJ-mBqGC3UaMaZA2wbOWDNa1Yi5zMTui0o8pk3n1PUNQk7WJbLVyQ9KgrjWQntQHhOZuirD6tXSXvw",
+    spotifyUrl: "https://open.spotify.com/",
+    youtubeUrl: "https://www.youtube.com/",
+  },
+  {
+    id: 2,
+    artist: "Coletivo Drill",
+    title: "Noites de Drill",
+    genre: "Drill",
+    cover:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDizzx7N7oQjf0D_61NNG6_BIISo87qSDj6I0DeH3tPXn8EB98XC-p30nPXECzsWw6gD29Cd8xGrDcghgUjHtpWzfQcWBlvJBPxfkyaRCcpuuzym_IXKIEqk1xCX2x4pEwc8LVSvNR2AfqPAst5aH8MqZdSyD3eKBIQxPhUUZg7gl_aVUvAsRqz1OPuAMNCpJTTP-sdCfsqNH1V8CSmmc1gI5XKbKp7mwNAPrCxvKp2yd-EuH3vxnykl5M3D0sDVCbteuK-AWDy9VE",
+    spotifyUrl: "https://open.spotify.com/",
+    youtubeUrl: "https://www.youtube.com/",
+  },
+  {
+    id: 3,
+    artist: "Impacto Real",
+    title: "Impacto Real",
+    genre: "R&B",
+    cover:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDpMkQ6KL8uAm_5m_zRSy-PKWqfOYDMOUFFD8otNQyqwajTWuWjxvJbT6OxWF6OreOsDzpwWrHLdtLHDUY48SyCUUGdBnexEqcbJ_orDnzJDH7Jcf7c_lD4JnLeioUmeDr1EqKvX50XP_80GoMA6dKFauV_Ljib-eXq7oS_V9yc-VH2XM-7L2OQTDxdXEFYGWiNMl0mqp41Ty-_jsp5eA8qxizb4THW4pRo7gqHk0biV8UA54jOUSYEVxygLSRRqk-69FXZgtSHWUg",
+    spotifyUrl: "https://open.spotify.com/",
+    youtubeUrl: "https://www.youtube.com/",
+  },
+];
+
+const GENRE_FILTERS = ["Todos", "Trap", "Drill", "Funk", "R&B"] as const;
+
 export default function Portfolio() {
-  const { playTrack } = useAudio();
+  const [activeGenre, setActiveGenre] = useState<(typeof GENRE_FILTERS)[number]>("Todos");
 
   // Inline player state for Beat do Mês
   const beatAudioRef = useRef<HTMLAudioElement | null>(null);
@@ -62,13 +105,11 @@ export default function Portfolio() {
     return `${Math.floor(t / 60)}:${Math.floor(t % 60).toString().padStart(2, "0")}`;
   };
 
-  const handlePlayTrack = (index: number) => {
-    if (MOCK_PLAYLIST[index]) {
-      playTrack(MOCK_PLAYLIST[index]);
-    }
-  };
-
   const whatsappBase = "https://wa.me/5519997791763?text=";
+  const filteredReleases =
+    activeGenre === "Todos"
+      ? RELEASES
+      : RELEASES.filter((release) => release.genre === activeGenre);
 
   return (
     <>
@@ -103,91 +144,79 @@ export default function Portfolio() {
         {/* Filter Bar */}
         <section className="px-8 max-w-screen-2xl mx-auto mb-12">
           <div className="flex items-center gap-4 overflow-x-auto no-scrollbar pb-4">
-            <button className="px-8 py-3 rounded-full bg-primary text-on-primary font-headline font-bold uppercase text-sm whitespace-nowrap transition-all shadow-[0_0_15px_rgba(35,218,237,0.2)] hover:scale-105 active:scale-95">Todos</button>
-            <button className="px-8 py-3 rounded-full bg-surface-container-highest text-on-surface-variant hover:text-white font-headline font-bold uppercase text-sm whitespace-nowrap transition-all hover:bg-surface-bright">Trap</button>
-            <button className="px-8 py-3 rounded-full bg-surface-container-highest text-on-surface-variant hover:text-white font-headline font-bold uppercase text-sm whitespace-nowrap transition-all hover:bg-surface-bright">Drill</button>
-            <button className="px-8 py-3 rounded-full bg-surface-container-highest text-on-surface-variant hover:text-white font-headline font-bold uppercase text-sm whitespace-nowrap transition-all hover:bg-surface-bright">Funk</button>
-            <button className="px-8 py-3 rounded-full bg-surface-container-highest text-on-surface-variant hover:text-white font-headline font-bold uppercase text-sm whitespace-nowrap transition-all hover:bg-surface-bright">R&B</button>
+            {GENRE_FILTERS.map((filter) => (
+              <button
+                key={filter}
+                onClick={() => setActiveGenre(filter)}
+                className={`px-8 py-3 rounded-full font-headline font-bold uppercase text-sm whitespace-nowrap transition-all ${
+                  activeGenre === filter
+                    ? "bg-primary text-on-primary shadow-[0_0_15px_rgba(35,218,237,0.2)]"
+                    : "bg-surface-container-highest text-on-surface-variant hover:text-white hover:bg-surface-bright"
+                }`}
+              >
+                {filter}
+              </button>
+            ))}
           </div>
         </section>
 
-        {/* Project Grid */}
+        {/* Portfolio Releases Grid */}
         <section className="px-8 max-w-screen-2xl mx-auto mb-32">
+          <div className="flex items-end justify-between mb-8 gap-6 flex-wrap">
+            <div>
+              <h2 className="text-3xl md:text-5xl font-headline font-black text-white uppercase tracking-tighter mb-3">
+                Lançamentos Recentes
+              </h2>
+              <p className="text-on-surface-variant max-w-2xl">
+                Portfólio oficial dos trabalhos do estúdio para exposição de artistas e geração de novas oportunidades comerciais.
+              </p>
+            </div>
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Project Card 1 */}
-            <div className="group relative aspect-square overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-500 hover:scale-[1.02]">
-              <Image 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuCo8NF5T5vrHHVq-K3vaWr4NlM19unyMX_bUcqYF69jwMgEMFqTVSbs31nqzoXNSifeTVTFV4bNQsj3kdzwWajWKHb_q9W-Hq-3E7u4Z0eszftcx9eHwfgIpvvUBy45sCtOlTtCUmAMMSA2G0VZt3vmUWGpS-8yTIl72eBb3RDKlwCgfNhG_5ZnvMnUeOPYVLJ-mBqGC3UaMaZA2wbOWDNa1Yi5zMTui0o8pk3n1PUNQk7WJbLVyQ9KgrjWQntQHhOZuirD6tXSXvw"
-                alt="artistic album cover featuring a silhouette of a rapper against a vibrant cyan neon cityscape background"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                loading="lazy"
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <span className="text-primary font-headline font-bold uppercase text-xs tracking-widest mb-2 block">Artista Trap</span>
-                <h3 className="text-2xl font-headline font-black text-white uppercase mb-4 tracking-tight">Cidades de Neon</h3>
-                <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300">
-                  <button 
-                    onClick={() => handlePlayTrack(2)}
-                    className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-sm">play_circle</span> Ouvir Preview
-                  </button>
+            {filteredReleases.map((release) => (
+              <div
+                key={release.id}
+                className="group relative aspect-square overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-500 hover:scale-[1.02]"
+              >
+                <Image
+                  src={release.cover}
+                  alt={`Capa de ${release.title}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  loading="lazy"
+                  className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
+                <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                  <span className="text-primary font-headline font-bold uppercase text-xs tracking-widest mb-2 block">
+                    {release.artist}
+                  </span>
+                  <h3 className="text-2xl font-headline font-black text-white uppercase mb-4 tracking-tight">
+                    {release.title}
+                  </h3>
+                  <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300">
+                    <a
+                      href={release.spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-sm">music_note</span>
+                      Spotify
+                    </a>
+                    <a
+                      href={release.youtubeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 border border-white/30 text-white px-4 py-2 rounded-lg text-xs font-bold uppercase hover:border-primary hover:text-primary transition-colors"
+                    >
+                      <span className="material-symbols-outlined text-sm">play_circle</span>
+                      YouTube
+                    </a>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Project Card 2 */}
-            <div className="group relative aspect-square overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-500 hover:scale-[1.02]">
-              <Image 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDizzx7N7oQjf0D_61NNG6_BIISo87qSDj6I0DeH3tPXn8EB98XC-p30nPXECzsWw6gD29Cd8xGrDcghgUjHtpWzfQcWBlvJBPxfkyaRCcpuuzym_IXKIEqk1xCX2x4pEwc8LVSvNR2AfqPAst5aH8MqZdSyD3eKBIQxPhUUZg7gl_aVUvAsRqz1OPuAMNCpJTTP-sdCfsqNH1V8CSmmc1gI5XKbKp7mwNAPrCxvKp2yd-EuH3vxnykl5M3D0sDVCbteuK-AWDy9VE"
-                alt="grainy black and white portrait of a singer in a recording booth with dramatic shadows and cyan light leak"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                loading="lazy"
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <span className="text-primary font-headline font-bold uppercase text-xs tracking-widest mb-2 block">Coletivo Drill</span>
-                <h3 className="text-2xl font-headline font-black text-white uppercase mb-4 tracking-tight">Noites de Drill</h3>
-                <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300">
-                  <button 
-                    onClick={() => handlePlayTrack(0)}
-                    className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-sm">play_circle</span> Ouvir Preview
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Project Card 3 */}
-            <div className="group relative aspect-square overflow-hidden rounded-xl bg-surface-container-high transition-transform duration-500 hover:scale-[1.02]">
-              <Image 
-                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDpMkQ6KL8uAm_5m_zRSy-PKWqfOYDMOUFFD8otNQyqwajTWuWjxvJbT6OxWF6OreOsDzpwWrHLdtLHDUY48SyCUUGdBnexEqcbJ_orDnzJDH7Jcf7c_lD4JnLeioUmeDr1EqKvX50XP_80GoMA6dKFauV_Ljib-eXq7oS_V9yc-VH2XM-7L2OQTDxdXEFYGWiNMl0mqp41Ty-_jsp5eA8qxizb4THW4pRo7gqHk0biV8UA54jOUSYEVxygLSRRqk-69FXZgtSHWUg"
-                alt="abstract visual representation of sound waves in electric blue and deep purple against a black background"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                loading="lazy"
-                className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-surface/40 to-transparent opacity-90 transition-opacity duration-300"></div>
-              <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                <span className="text-primary font-headline font-bold uppercase text-xs tracking-widest mb-2 block">Impacto Real</span>
-                <h3 className="text-2xl font-headline font-black text-white uppercase mb-4 tracking-tight">Impacto Real</h3>
-                <div className="flex gap-3 opacity-0 group-hover:opacity-100 transition-opacity delay-100 duration-300">
-                  <button 
-                    onClick={() => handlePlayTrack(1)}
-                    className="flex items-center gap-2 bg-white text-black px-4 py-2 rounded-lg text-xs font-bold uppercase hover:bg-primary hover:text-on-primary transition-colors"
-                  >
-                    <span className="material-symbols-outlined text-sm">play_circle</span> Ouvir Preview
-                  </button>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
 
@@ -339,4 +368,3 @@ export default function Portfolio() {
     </>
   );
 }
-

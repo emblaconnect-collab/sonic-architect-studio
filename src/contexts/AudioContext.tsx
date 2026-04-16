@@ -62,8 +62,8 @@ export const MOCK_PLAYLIST: TrackData[] = [
   },
   {
     id: "4",
-    title: "Vibe Retro",
-    artist: "DJ Low-Fix SonicArchitect",
+    title: "Primeiro Ato",
+    artist: "Gabryyzera",
     genre: "Boombap · Hip Hop Underground",
     url: "/audios/vibe-retro.mp3",
     cover: "/capa-vibe-retro.jpeg",

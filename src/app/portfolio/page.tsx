@@ -52,8 +52,8 @@ const RELEASES: ReleaseItem[] = [
   {
     id: 4,
     label: "Vibe",
-    artist: "DJ Low-Fi x SonicArchitect",
-    title: "Vibe Retro",
+    artist: "Gabryyzera",
+    title: "Primeiro Ato",
     description: "Boombap · Hip Hop Underground",
     cover: "/capa-vibe-retro.jpeg",
     spotifyUrl: "https://open.spotify.com/",

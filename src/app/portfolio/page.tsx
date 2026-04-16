@@ -26,8 +26,8 @@ const RELEASES: ReleaseItem[] = [
     title: "BNP",
     description: "Boombap · Hip Hop Underground",
     cover: "/caio-ocean-capa.png",
-    spotifyUrl: "https://open.spotify.com/",
-    youtubeUrl: "https://www.youtube.com/",
+    spotifyUrl: "https://open.spotify.com/intl-pt/track/430YJ1fYo7y9HIJmNpRTDp",
+    youtubeUrl: "https://www.youtube.com/watch?v=zc4U5LiE2-k",
   },
   {
     id: 2,
@@ -36,8 +36,8 @@ const RELEASES: ReleaseItem[] = [
     title: "Dinheiro não sai de moda",
     description: "R&B / Drill · Hip Hop Underground",
     cover: "/capa-big-blakk.png",
-    spotifyUrl: "https://open.spotify.com/",
-    youtubeUrl: "https://www.youtube.com/",
+    spotifyUrl: "https://open.spotify.com/intl-pt/track/6Y6wA87vTnc7x7Qg39zVO2",
+    youtubeUrl: "https://www.youtube.com/watch?v=qjcm5akW71w",
   },
   {
     id: 3,
@@ -46,8 +46,8 @@ const RELEASES: ReleaseItem[] = [
     title: "DPMO",
     description: "UK Drill · UK Rap",
     cover: "/capa-digga-d.png",
-    spotifyUrl: "https://open.spotify.com/",
-    youtubeUrl: "https://www.youtube.com/",
+    spotifyUrl: "https://open.spotify.com/intl-pt/album/3xufC9z1KXYbBVWO66rG2Y",
+    youtubeUrl: "https://www.youtube.com/watch?v=lQ9WPaXFRD0",
   },
   {
     id: 4,

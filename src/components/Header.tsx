@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,55 +8,54 @@ export function Header() {
   const pathname = usePathname();
   const { totalItems, toggleDrawer } = useCart();
 
-  // Helper to determine if a route is active
   const isActive = (path: string) => pathname === path;
 
   return (
     <>
       <nav className="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-xl shadow-[0_0_40px_0_rgba(35,218,237,0.06)] border-b border-white/5">
-        <div className="flex justify-between items-center w-full px-8 py-5 mx-auto max-w-screen-2xl">
+        <div className="relative flex justify-between items-center w-full px-8 py-5 mx-auto max-w-screen-2xl">
           <Link href="/" className="text-2xl font-black tracking-tighter text-primary font-headline">
             SonicArchitect
           </Link>
-          
+
           <div className="hidden md:flex gap-8 items-center">
-            <Link 
-              className={`${isActive("/") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`} 
+            <Link
+              className={`${isActive("/") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`}
               href="/"
             >
               Estúdio
             </Link>
-            <Link 
-              className={`${isActive("/servicos") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`} 
+            <Link
+              className={`${isActive("/servicos") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`}
               href="/servicos"
             >
               Serviços
             </Link>
-            <Link 
-              className={`${isActive("/portfolio") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`} 
+            <Link
+              className={`${isActive("/portfolio") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`}
               href="/portfolio"
             >
               Portfólio
             </Link>
-            <Link 
-              className={`${isActive("/beats") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`} 
+            <Link
+              className={`${isActive("/beats") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`}
               href="/beats"
             >
               Beats
             </Link>
-            <Link 
-              className={`${isActive("/contato") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`} 
+            <Link
+              className={`${isActive("/contato") ? "text-primary font-bold border-b-2 border-primary pb-1" : "text-on-surface-variant font-medium hover:text-primary transition-all"} font-headline tracking-tight`}
               href="/contato"
             >
               Contato
             </Link>
           </div>
-          
-          <div className="flex gap-4 items-center">
-            {/* Cart Icon */}
+
+          <div className="flex gap-4 items-center pr-11 md:pr-0">
+            {/* Cart Icon - Desktop */}
             <button
               onClick={toggleDrawer}
-              className="relative text-on-surface-variant hover:text-primary transition-colors duration-200 active:scale-95"
+              className="hidden md:inline-flex relative text-on-surface-variant hover:text-primary transition-colors duration-200 active:scale-95"
             >
               <span className="material-symbols-outlined text-2xl">shopping_cart</span>
               {totalItems > 0 && (
@@ -69,6 +68,19 @@ export function Header() {
               Agendar Sessão
             </Link>
           </div>
+
+          {/* Cart Icon - Mobile (canto direito, na frente do botão Agendar) */}
+          <button
+            onClick={toggleDrawer}
+            className="md:hidden absolute right-8 top-1/2 -translate-y-1/2 z-20 text-on-surface-variant hover:text-primary transition-colors duration-200 active:scale-95"
+          >
+            <span className="material-symbols-outlined text-2xl">shopping_cart</span>
+            {totalItems > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-primary text-on-primary text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center shadow-[0_0_8px_rgba(35,218,237,0.5)]">
+                {totalItems}
+              </span>
+            )}
+          </button>
         </div>
       </nav>
 
@@ -93,7 +105,7 @@ export function Header() {
         {/* Cart Mobile */}
         <button
           onClick={toggleDrawer}
-          className={`flex flex-col items-center justify-center gap-1 h-full flex-1 relative text-on-surface-variant hover:text-primary transition-colors`}
+          className="flex flex-col items-center justify-center gap-1 h-full flex-1 relative text-on-surface-variant hover:text-primary transition-colors"
         >
           <span className="material-symbols-outlined">shopping_cart</span>
           {totalItems > 0 && (

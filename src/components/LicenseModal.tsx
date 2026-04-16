@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
 import { LICENSE_OPTIONS, LicenseOption } from "@/contexts/CartContext";
 
@@ -17,13 +17,25 @@ interface LicenseModalProps {
   onSelect: (license: LicenseOption) => void;
 }
 
+function parseBeatPrice(priceText: string): number {
+  const numeric = Number(priceText.replace(/[^\d]/g, ""));
+  return Number.isFinite(numeric) && numeric > 0 ? numeric : 179;
+}
+
 export function LicenseModal({ beat, isOpen, onClose, onSelect }: LicenseModalProps) {
   const [selected, setSelected] = useState<string>("basica");
+
+  const modalLicenses = useMemo(() => {
+    const basePrice = parseBeatPrice(beat.price);
+    return LICENSE_OPTIONS.map((license) =>
+      license.id === "basica" ? { ...license, price: basePrice } : license,
+    );
+  }, [beat.price]);
 
   if (!isOpen) return null;
 
   const handleConfirm = () => {
-    const license = LICENSE_OPTIONS.find((l) => l.id === selected);
+    const license = modalLicenses.find((l) => l.id === selected);
     if (license) {
       onSelect(license);
       onClose();
@@ -75,7 +87,7 @@ export function LicenseModal({ beat, isOpen, onClose, onSelect }: LicenseModalPr
               Escolha a Licença
             </h4>
 
-            {LICENSE_OPTIONS.map((license) => (
+            {modalLicenses.map((license) => (
               <label
                 key={license.id}
                 className={`flex items-center justify-between p-4 rounded-xl border-2 cursor-pointer transition-all duration-200 ${
@@ -109,9 +121,7 @@ export function LicenseModal({ beat, isOpen, onClose, onSelect }: LicenseModalPr
                   </span>
                 </div>
                 <span className="font-headline font-black text-primary">
-                  {license.price > 0
-                    ? `R$ ${license.price}`
-                    : "Sob Consulta"}
+                  {license.price > 0 ? `R$ ${license.price}` : "Sob Consulta"}
                 </span>
               </label>
             ))}

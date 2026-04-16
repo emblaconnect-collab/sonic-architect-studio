@@ -166,6 +166,9 @@ export default function Beats() {
                     <div>
                       <h3 className="font-headline font-black text-lg truncate text-white uppercase tracking-tight">{beat.title}</h3>
                       <p className="text-on-surface-variant text-xs mt-0.5">{beat.genre} · {beat.bpm} BPM · {beat.key}</p>
+                      {beat.description && (
+                        <p className="text-on-surface-variant/60 text-[11px] mt-1.5 line-clamp-2 leading-relaxed">{beat.description}</p>
+                      )}
                     </div>
                     <div className="flex items-center justify-between pt-1">
                       <span className="text-primary font-black text-lg">{beat.price}</span>
